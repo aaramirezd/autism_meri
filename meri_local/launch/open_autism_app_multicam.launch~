@@ -1,0 +1,45 @@
+<launch>
+  <rosparam param="/image_name"> "Pablo"</rosparam>  <!--Nomes das crianças 03/11/17 Lorenzo,Luca,Arthur,Danilo,Mateus  Nomes das crianças 29/09/17  Maria eliz, João Vitor, Isaque, Frank-->
+  <!--Nomes das crianças Típicas 17/11/17 Felipe, Eloar, atípica Eduardo -->
+  <!--Nomes das crianças aTípicas Henry 29/11/17 Pablo, típica -->
+  <arg name="world_frame_id" default="/world" />
+  <arg name="face_frame" default="face_link"/>
+  <arg name="plot_data" default="false" />
+  <arg name="record_focus_data" default="true" />
+  <arg name="record_image_data" default="true" />
+  <arg name="record_all_data" default="false" />
+  <arg name="stereo_name" default="logitech_a"/>
+  <arg name="camera_name" default="kinect2_a"/>
+  
+  <!-- Launch calibration results -->
+  <include file="$(find open_tracker)/launch/opt_calibration_results.launch"/>
+  
+  <!-- Launch multi sensor -->
+  <include file="$(find open_tracker)/launch/open_tracking_multicam.launch">
+    <arg name="stereo_name" value="$(arg stereo_name)"/>
+    <arg name="camera_name" value="$(arg camera_name)"/>
+    <arg name="recognition" value="true"/>
+  </include>
+  
+  <!-- Launch Fusion node -->
+  
+  <!-- Launch Estimate Focus -->
+  <include file="$(find open_tracker)/launch/focus_estimation.launch">
+    <arg name="face_frame" value="$(arg face_frame)"/>
+    <arg name="world_frame_id" value="$(arg world_frame_id)"/>
+  </include>
+  
+  <!-- Visualization >
+  <include file="$(find open_tracker)/launch/multicamera_visualization.launch">
+    <arg name="plot_data" value="$(arg plot_data)" />
+  </include-->  
+  
+  <!-- Record data -->
+  <include file="$(find open_tracker)/launch/record_data.launch">
+    <arg name="record_focus_data" value="$(arg record_focus_data)" />
+    <arg name="record_image_data" value="$(arg record_image_data)" />
+    <arg name="record_all_data" value="$(arg record_all_data)" />
+    <arg name="camera_name" value="$(arg camera_name)"/>
+  </include> 
+
+</launch>

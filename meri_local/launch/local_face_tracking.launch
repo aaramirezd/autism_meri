@@ -1,0 +1,47 @@
+
+<!-- Autism MERI system, local launch file -->
+<launch>
+  <arg name="camera_name" default="kinect2_a"/>
+  <arg name="device" default=""/>
+  <arg name="channels" default="1"/>
+  <arg name="sample_rate" default="16000"/>
+  <arg name="format" default="mp3"/>
+  <arg name="dst" default="$(find meri_local)/audios/$(arg camera_name)_output.mp3"/>
+  <arg name="ns" default="audio"/>
+  <arg name="record_audio" default="false"/>
+  <arg name="record_image" default="true"/>
+  <arg name="bag_path" default="/home/castor2/ROS_BAG_test/HG_07_08"/>
+
+  <include file="$(find meri_local)/launch/kinect2_bridge.launch">
+    <arg name="base_name"    value="$(arg camera_name)" />
+    <arg name="publish_tf"   value="true" />
+    <arg name="output"       value="log" />
+  </include>
+  
+  <group ns="tracker_$(arg camera_name)">
+    <node pkg="meri_local" type="face_tracking_estimation" name="Prueba1" output="screen">
+      <param name="model_loc" value="-fx 1.0599465578241038e+03 -fy 1.0539326808799726e+03 -cx 4.7488326677588441e+02 -cy 2.6373858291060583e+02"/>
+      <param name="parent_path" value="$(find meri_local)"/>
+      <remap from="/tracker_$(arg camera_name)/image" to="/$(arg camera_name)/hd/image_color_crop"/>
+    </node>
+  </group>
+  
+  <group ns="$(arg ns)">
+    <node if="$(arg record_audio)" name="audio_capture" pkg="audio_capture" type="audio_capture" output="screen">
+      <param name="bitrate" value="128"/>
+      <param name="device" value="$(arg device)"/>
+      <param name="channels" value="$(arg channels)"/>
+      <param name="sample_rate" value="$(arg sample_rate)"/>
+      <param name="format" value="$(arg format)"/>
+      <param name="dst" command="$(arg dst)"/>
+    </node>
+  </group>
+  
+  <include file="$(find meri_local)/launch/record_data.launch">
+    <arg name="bag_path" value="$(arg bag_path)"/>
+    <arg name="record_image_data" value="$(arg record_image)"/>
+    <arg name="camera_name" value="$(arg camera_name)"/>
+  </include> 
+</launch>
+
+

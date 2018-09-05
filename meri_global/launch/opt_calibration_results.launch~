@@ -1,0 +1,26 @@
+<launch>
+
+  <!-- Network parameters -->
+
+  <!-- pc: PC2 -->
+  <!-- sensor: kinect2_b -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="kinect2_b_broadcaster"
+        args="1.00258 2.65139 1.10453 0.0963691 0.720366 -0.681965 -0.0819149 world kinect2_b" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="kinect2_b_broadcaster_2"
+        args="0 0 0 0 0 0 kinect2_b kinect2_b_link"/>
+
+  <!-- pc: PC3 -->
+  <!-- sensor: kinect2_c -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="kinect2_c_broadcaster"
+        args="-1.20803 1.37862 1.13553 -0.505925 0.515024 -0.495909 0.482561 world kinect2_c" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="kinect2_c_broadcaster_2"
+        args="0 0 0 0 0 0 kinect2_c kinect2_c_link"/>
+
+  <!-- pc: PC1 -->
+  <!-- sensor: kinect2_a -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="kinect2_a_broadcaster"
+        args="-1.06874 2.61377 1.13916 -0.275953 0.674814 -0.632855 0.260712 world kinect2_a" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="kinect2_a_broadcaster_2"
+        args="0 0 0 0 0 0 kinect2_a kinect2_a_link"/>
+
+</launch>

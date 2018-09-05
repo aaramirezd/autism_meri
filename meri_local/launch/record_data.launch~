@@ -1,0 +1,13 @@
+<launch>
+  <arg name="record_image_data" default="true" />
+  <arg name="camera_name" default="kinect2_a"/>
+  <arg name="bag_path" default="/home/castor2/ROS_BAG_test/HG_07_08"/>
+
+  <node pkg="rosbag" type="record" name="rosbag_record_image_data" respawn="true"
+       args="-o $(arg bag_path)/image_$(arg camera_name) --buffsize=0 --chunksize=100000 /$(arg camera_name)/hd/image_color_crop/compressed"
+       if="$(arg record_image_data)" />
+       
+  <node pkg="rosbag" type="record" name="rosbag_record_face_data" respawn="true"
+       args="-o $(arg bag_path)/face_$(arg camera_name) --buffsize=0 --chunksize=100000 /tracker_$(arg camera_name)/face/compressed"
+       if="$(arg record_image_data)"/>
+</launch>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="face_frame" default="focus_frame"/>
+  <arg name="world_frame_id" default="world"/>
+  <!-- Static transforms Enviroment setup -->
+  <node name="trem" pkg="tf2_ros" type="static_transform_publisher" args="2.22 1.05 1.60 0 0 0 $(arg world_frame_id) trem"/>
+  <node name="caminhao" pkg="tf2_ros" type="static_transform_publisher" args="2.22 2.48 1.60 0 0 0 $(arg world_frame_id) caminhao"/>
+  <node name="helicoptero" pkg="tf2_ros" type="static_transform_publisher" args="0.27 2.69 1.60 0 0 0 $(arg world_frame_id) helicoptero"/>
+  <node name="robo" pkg="tf2_ros" type="static_transform_publisher" args="-0.45 1.55 1.00 0 0 0 $(arg world_frame_id) robo"/>
+  <!--node name="ono_transform" pkg="tf" type="static_transform_publisher" args="0 0.4 0.4 0 0 0 $(arg world_frame_id) /Ono"/-->
+  
+  <!--tf using an x/y/z offset in meters and yaw/pitch/roll in radians. (yaw is rotation about Z, pitch is rotation about Y, and roll is rotation about X) -->
+  <!--node name="my_camera_transform" pkg="tf" type="static_transform_publisher" args="0 0 0.5 1.57 0 2. /origin $(arg camera_name)_rgb_optical_frame 100"/--> 
+  <!--node name="base_footprint_transform" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 /map /origin 100"/-->
+
+  <node pkg="autism_meri" type="visual_focus_estimation" name="visual_focus_estimation" output="screen">
+    <param name="face_frame" value="$(arg face_frame)"/>
+  </node>
+
+</launch>
