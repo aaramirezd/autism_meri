@@ -8,7 +8,7 @@
   <arg name="format" default="mp3"/>
   <arg name="dst" default="$(find meri_local)/audios/$(arg camera_name)_output.mp3"/>
   <arg name="ns" default="audio"/>
-  <arg name="record_audio" default="true"/>
+  <arg name="record_audio" default="false"/>
   <arg name="record_image" default="true"/>
   <arg name="bag_path" default="$(env HOME)/ROS_BAG_test/HG_07_08"/>
 
