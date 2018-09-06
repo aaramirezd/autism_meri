@@ -1,7 +1,7 @@
 
 <!-- Autism MERI system, local launch file -->
 <launch>
-  <arg name="camera_name" default="kinect2_a"/>
+  <arg name="camera_name" default="kinect2_b"/>
   <arg name="device" default=""/>
   <arg name="channels" default="1"/>
   <arg name="sample_rate" default="16000"/>
