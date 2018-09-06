@@ -57,7 +57,7 @@
     <param name="worker_threads"    type="int"    value="$(arg worker_threads)"/>
   </node>
   
-  <node pkg="nodelet" type="nodelet" name="image_crop"
+  <node pkg="nodelet" type="nodelet" name="$(arg base_name)_image_crop"
             args="load image_proc/crop_decimate $(arg nodelet_manager)">
         <param name="x_offset" type="int" value="480" />
         <param name="y_offset" type="int" value="270" />

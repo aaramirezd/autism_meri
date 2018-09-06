@@ -25,7 +25,7 @@
   </node>
   
   <group ns="$(arg ns)">
-    <node if="$(arg record_audio)" name="audio_capture" pkg="audio_capture" type="audio_capture" output="screen">
+    <node if="$(arg record_audio)" name="audio_capture" pkg="$(arg camera_name)_audio_capture" type="audio_capture" output="screen">
       <param name="bitrate" value="128"/>
       <param name="device" value="$(arg device)"/>
       <param name="channels" value="$(arg channels)"/>
