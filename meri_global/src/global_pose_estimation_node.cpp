@@ -134,7 +134,7 @@ int main(int argc, char** argv)
   ros::NodeHandle nh("~");
 
   ros::Subscriber input_sub = nh.subscribe("input", 5, call_global_pose);
-  ros::Timer timer = nh.createTimer(ros::Duration(0.066), timer_callback);
+  ros::Timer timer = nh.createTimer(ros::Duration(0.0333), timer_callback);
 
   static tf2_ros::TransformBroadcaster pose_broadcaster;
   tf2_ros::Buffer tfBuffer;
