@@ -9,8 +9,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     //ROS initialization
-    ros::init(argc, argv, "ros_opentracker");
-    ros::NodeHandle rosNode;
+    ros::init(argc, argv, "local_tracker");
     ros::NodeHandle _private_node("~");
     ros::Rate hz(30);
     // load parameters
@@ -24,7 +23,7 @@ int main(int argc, char* argv[])
     std::vector<string> v_arguments(begin, end);
     
     ROS_INFO_STREAM("Initializing the face detector");
-    TrackerEstimator estimator(rosNode,v_arguments);
+    TrackerEstimator estimator(_private_node,v_arguments);
     ROS_INFO("Tracker_estimator is ready");
     ros::spin();
 
