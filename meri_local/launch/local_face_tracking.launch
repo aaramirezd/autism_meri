@@ -18,13 +18,11 @@
     <arg name="output"       value="log" />
   </include>
   
-  <group ns="tracker_$(arg camera_name)">
-    <node pkg="meri_local" type="face_tracking_estimation" name="Prueba1" output="screen">
-      <param name="model_loc" value="-fx 1.0599465578241038e+03 -fy 1.0539326808799726e+03 -cx 4.7488326677588441e+02 -cy 2.6373858291060583e+02"/>
-      <param name="parent_path" value="$(find meri_local)"/>
-      <remap from="/tracker_$(arg camera_name)/image" to="/$(arg camera_name)/hd/image_color_crop"/>
-    </node>
-  </group>
+  <node pkg="meri_local" type="face_tracking_estimation" name="node_$(arg camera_name)" output="screen">
+    <param name="model_loc" value="-fx 1.059946557824103e+03 -fy 1.053932680879972e+03 -cx 4.748832667758844e+02 -cy 2.637385829106058e+02"/>
+    <param name="parent_path" value="$(find meri_local)"/>
+    <remap from="/node_$(arg camera_name)/image" to="/$(arg camera_name)/hd/image_color_crop"/>
+  </node>
   
   <group ns="$(arg ns)">
     <node if="$(arg record_audio)" name="audio_capture" pkg="audio_capture" type="audio_capture" output="screen">

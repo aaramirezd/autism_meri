@@ -8,6 +8,6 @@
        if="$(arg record_image_data)" />
        
   <node pkg="rosbag" type="record" name="rosbag_record_face_data" respawn="true"
-       args="-o $(arg bag_path)/face_$(arg camera_name) --buffsize=0 --chunksize=100000 /tracker_$(arg camera_name)/face/compressed"
+       args="-o $(arg bag_path)/face_$(arg camera_name) --buffsize=0 --chunksize=100000 /node_$(arg camera_name)/face/compressed"
        if="$(arg record_image_data)"/>
 </launch>
