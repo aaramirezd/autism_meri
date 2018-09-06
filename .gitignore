@@ -1,4 +1,3 @@
-# Ignore data folder
 data/
-# Ignore sound folder
 audios/
+*.jpg
