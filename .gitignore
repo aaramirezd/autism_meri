@@ -1,4 +1,4 @@
 # Ignore data folder
-meri_local/data
+meri_local/data/
 # Ignore sound folder
-meri_local/audios
+meri_local/audios/
