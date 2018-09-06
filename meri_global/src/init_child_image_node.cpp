@@ -66,7 +66,12 @@ int main( int argc, char** argv )
       ros::spinOnce();
       r.sleep();
     }
-    boost::filesystem::copy_file(FullPath, to_FullPath, boost::filesystem::copy_option::overwrite_if_exists);
+    try{
+        boost::filesystem::copy_file(FullPath, to_FullPath, boost::filesystem::copy_option::overwrite_if_exists);
+    }
+    catch(const boost::filesystem::filesystem_error& e){
+        ROS_WARN_STREAM(" Image remote saved error: "<< e.code().message());
+    }
     n.setParam("/user_is_ready", true);      
     cv::destroyAllWindows();
 }

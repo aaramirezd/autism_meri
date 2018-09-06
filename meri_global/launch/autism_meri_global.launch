@@ -3,7 +3,7 @@
 <launch>
   <arg name="camera_name" default="kinect2_b"/>
   <arg name="FullPath" default="$(find meri_local)/data/user.jpg"/>
-  <arg name="to_FullPath" default="$(env HOME)/user.jpg"/>
+  <arg name="to_FullPath" default="/run/user/1000/gvfs/sftp:host=192.168.100.102/home/castor/catkin_ws/src/autism_meri/meri_local/data/user.jpg"/>
   <arg name="box_size" default="250"/>
   <arg name="bag_path" default="$(env HOME)/ROS_BAG_test/HG_07_08"/>
   <arg name="record_focus_data" default="true" />

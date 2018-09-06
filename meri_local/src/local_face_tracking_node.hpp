@@ -138,14 +138,15 @@ private:
     cv::Vec6d pose_estimate;
   
     matrix<rgb_pixel> dlib_img;
-    correlation_tracker dlib_tracker;
+    std::vector<correlation_tracker> unknow_dlib_trackers;
+    std::vector<correlation_tracker> know_dlib_trackers;
     dlib::drectangle know_tracker_rec;
         
     // OpenFace
     LandmarkDetector::FaceModelParameters det_parameters;
     LandmarkDetector::CLNF clnf_model; 
 
-    std::vector<correlation_tracker> unknow_dlib_trackers;
+    
     std::vector<cv::Rect> faces;
     std::vector<matrix<rgb_pixel>> Rec_faces;
     std::string parent_path;

@@ -109,49 +109,53 @@ void TrackerEstimator::dnn_detect_Faces(const sensor_msgs::ImageConstPtr& msg)
             std::vector<matrix<float,0,1>> face_descriptors = net(Rec_faces);
             std::vector<std::string> label;
             unknow_dlib_trackers.clear();
-            
-            for (size_t i = 0; i < face_descriptors.size(); ++i){
-                ROS_INFO_STREAM(" N of Faces "<< face_descriptors.size());
-                if (length(face_descriptors[i]-know_face_descriptor[0]) < 0.6){
-                    label.push_back("face_know");
-                    if(dets[i].rect.width()!= 0){
-                        dlib_tracker.start_track(dlib_img, dets[i].rect);
-                        know_tracker_rec=dets[i].rect;
+            know_dlib_trackers.clear();
+            ROS_INFO_STREAM(" N of Faces "<< face_descriptors.size());
+            if (faces.size() != 0){
+                for (size_t i = 0; i < face_descriptors.size(); ++i){
+                    if (length(face_descriptors[i]-know_face_descriptor[0]) < 0.6){
+                        label.push_back("face_know");
+                        correlation_tracker temp_dlib_tracker;
+                        if(dets[i].rect.width()!= 0){
+                            temp_dlib_tracker.start_track(dlib_img, dets[i].rect);
+                            know_dlib_trackers.push_back(temp_dlib_tracker);
+                        }
+                    }
+                    else{
+                        label.push_back("face_unknow");
+                        correlation_tracker temp_dlib_tracker;
+                        if(dets[i].rect.width()!= 0){
+                            temp_dlib_tracker.start_track(dlib_img, dets[i].rect);
+                            unknow_dlib_trackers.push_back(temp_dlib_tracker);
+                        }
                     }
                 }
-                else{
-                    label.push_back("face_unknow");
-                    correlation_tracker temp_dlib_tracker;
-                    if(dets[i].rect.width()!= 0){
-                        temp_dlib_tracker.start_track(dlib_img, dets[i].rect);
-                        unknow_dlib_trackers.push_back(temp_dlib_tracker);
-                    }
-                }
+                tracker_init = true;
+                ROS_INFO(" Dlib tracker activated ");
             }
-            tracker_init = true;
-            ROS_INFO(" Dlib tracker activated ");
         }
-        
-        for (auto&& tr : unknow_dlib_trackers){
-            tr.update(dlib_img);
-            dlib::drectangle unknow_tracker_rec=tr.get_position();
-            cv::Rect_<float> temp_rect;
-            temp_rect.x = unknow_tracker_rec.tl_corner().x();
-            temp_rect.y = unknow_tracker_rec.tl_corner().y();
-            temp_rect.width = unknow_tracker_rec.width();
-            temp_rect.height = unknow_tracker_rec.height();
-            cv::rectangle(croppedImg,temp_rect,CV_RGB(255, 255 , 255),-1);
+        else{
+            for (auto&& tr : unknow_dlib_trackers){
+                tr.update(dlib_img);
+                dlib::drectangle unknow_tracker_rec=tr.get_position();
+                cv::Rect_<float> temp_rect;
+                temp_rect.x = unknow_tracker_rec.tl_corner().x();
+                temp_rect.y = unknow_tracker_rec.tl_corner().y();
+                temp_rect.width = unknow_tracker_rec.width();
+                temp_rect.height = unknow_tracker_rec.height();
+                cv::rectangle(croppedImg,temp_rect,CV_RGB(255, 255 , 255),-1);
+            }
+            for (auto&& tr_know : know_dlib_trackers){
+                tr_know.update(dlib_img);
+                know_tracker_rec=tr_know.get_position();	      
+                region.x = know_tracker_rec.tl_corner().x();// + 0.0389f * know_tracker_rec.width();
+	            region.y = know_tracker_rec.tl_corner().y();// + 0.1278f * know_tracker_rec.height();
+    	        region.width = know_tracker_rec.width();// * 0.9611);
+                region.height = know_tracker_rec.height();// * 0.9388);
+                cv::rectangle(croppedImg,region,CV_RGB(50, 255 , 50),2);
+            }
+	        
         }
-        
-        dlib_tracker.update(dlib_img);
-        know_tracker_rec=dlib_tracker.get_position();	      
-        
-	    region.x = know_tracker_rec.tl_corner().x();// + 0.0389f * know_tracker_rec.width();
-	    region.y = know_tracker_rec.tl_corner().y();// + 0.1278f * know_tracker_rec.height();
-    	region.width = know_tracker_rec.width();// * 0.9611);
-        region.height = know_tracker_rec.height();// * 0.9388);
-        
-        cv::rectangle(croppedImg,region,CV_RGB(50, 255 , 50),2);
         
         fps_tracker.AddFrame();
         

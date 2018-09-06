@@ -2,7 +2,7 @@
 
 ## Maintainer
 
-- [Andres Ramirez](<<aaramirezd@gmail.com>>, [Assistive technologic Center], Federal University of Espirito Santo, Brazil
+- [Andres Ramirez](<<aaramirezd@gmail.com>>, [Assistive technology Center], Federal University of Espirito Santo, Brazil
 
 ## Read this first
 
