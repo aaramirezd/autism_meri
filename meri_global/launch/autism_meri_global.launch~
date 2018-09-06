@@ -3,10 +3,10 @@
 <launch>
   <arg name="camera_name" default="kinect2_a"/>
   <arg name="FullPath" default="$(find meri_local)/data/user.jpg"/>
-  <arg name="to_FullPath" default="/home/castor2/user.jpg"/>
+  <arg name="to_FullPath" default="$(env HOME)/user.jpg"/>
   <arg name="box_size" default="250"/>
-  <arg name="bag_path" default="/home/castor2/ROS_BAG_test/HG_07_08"/>
-  <arg name="record_focus_data" default="false" />
+  <arg name="bag_path" default="$(env HOME)/ROS_BAG_test/HG_07_08"/>
+  <arg name="record_focus_data" default="true" />
   <arg name="face_frame" default="focus_frame"/>
   
   <!-- Launch calibration results -->

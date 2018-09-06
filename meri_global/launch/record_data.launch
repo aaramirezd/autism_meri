@@ -1,6 +1,6 @@
 <launch>
   <arg name="record_focus_data" default="true" />
-  <arg name="bag_path" default="/home/castor2/ROS_BAG_test/HG_07_08"/>
+  <arg name="bag_path" default="$(env HOME)/ROS_BAG_test/HG_07_08"/>
 
   <node pkg="rosbag" type="record" name="rosbag_record_focus_data" respawn="true"
        args="-o $(arg bag_path)/focus_data --buffsize=0 --chunksize=100000 /tf /tf_static /visual_focus_estimation/actual_focus_of_attention /visual_focus_estimation/face_field_of_view"

@@ -42,7 +42,6 @@
     <arg name="record_image_data" value="$(arg record_image)"/>
     <arg name="camera_name" value="$(arg camera_name)"/>
   </include> 
-
 </launch>
 
 

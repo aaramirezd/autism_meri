@@ -10,7 +10,7 @@
   <arg name="ns" default="audio"/>
   <arg name="record_audio" default="false"/>
   <arg name="record_image" default="true"/>
-  <arg name="bag_path" default="/home/castor2/ROS_BAG_test/HG_07_08"/>
+  <arg name="bag_path" default="$(env HOME)/ROS_BAG_test/HG_07_08"/>
 
   <include file="$(find meri_local)/launch/kinect2_bridge.launch">
     <arg name="base_name"    value="$(arg camera_name)" />
