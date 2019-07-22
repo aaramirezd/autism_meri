@@ -7,7 +7,7 @@
 7. Instalar Ceres Solver
 8. Instalar Calibration Toolkit branch (indigo_v0.3)
 9. Instalar el Kinect2_Network (o sólo instalar el paquete de calibración interno es decir opt_calibration, opt_utils y opt_msgs)
-10. Instalar dlib 19.13 (yo descargaba la libreria, guardaba en la ubicación /home/usrlib/ y compilaba con build, cmake y sudo make install )
+10. Instalar dlib 19.15 (yo descargaba la libreria, guardaba en la ubicación /home/usrlib/ y compilaba con build, cmake y sudo make install )
 11. Instalar OpenFace con sus dependencias (Ojo, usar la versión que estaba en la maquina antiguamente)
   11.1 tienen que borrar la carpeta build dentro de OpenFace, y crear de nuevo,
   11.2 Mirar el archivo install.sh en la raiz de OpenFace e instalar todas las dependencias manualmente, OJO sin ejecutar el archivo y no necesitan seguir todos los pasos, solo busquen los sudo apt-get install y ejecutan los de los paquetes que ustedes no han instalado
